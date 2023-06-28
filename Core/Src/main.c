@@ -58,10 +58,6 @@ static void MX_TIM2_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-volatile q15_t angle = 0;
-volatile q15_t angle_offset = 0x4000; // 180 deg
-volatile q15_t sine;
-
 /* USER CODE END 0 */
 
 /**
@@ -106,9 +102,10 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  LL_GPIO_SetOutputPin(LED_GPIO_Port,LED_Pin);
 
-	  angle_offset+=0x7fff/360/10;
-	  HAL_Delay(5);
+//	  angle_offset+=0x7fff/360/10;
+//	  HAL_Delay(5);
 ;
     /* USER CODE END WHILE */
 
@@ -242,7 +239,7 @@ static void MX_TIM2_Init(void)
   /* USER CODE END TIM2_Init 1 */
   TIM_InitStruct.Prescaler = 0;
   TIM_InitStruct.CounterMode = LL_TIM_COUNTERMODE_UP;
-  TIM_InitStruct.Autoreload = 2099;
+  TIM_InitStruct.Autoreload = 167;
   TIM_InitStruct.ClockDivision = LL_TIM_CLOCKDIVISION_DIV1;
   LL_TIM_Init(TIM2, &TIM_InitStruct);
   LL_TIM_DisableARRPreload(TIM2);
